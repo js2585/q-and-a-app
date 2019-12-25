@@ -94,10 +94,10 @@ app.post("/questions/:id/answers", (req, res)=>{
                     question.save();
                     res.redirect("/questions/" + question._id);
                 }
-            })
+            });
         }
-    })
-})
+    });
+});
 
 app.listen(PORT, function(){
     console.log("Running on port " + PORT);
