@@ -1,0 +1,27 @@
+<%-include("partials/header")%>
+    <div class="row col-lg-9">
+        <div class="indexContainer">
+            <div class="grid">
+                <h1 class="headline">Top Questions</h1>
+                <p class="ask-btn">
+                    <a class="btn btn-primary btn-md" href="/questions/ask">Ask a Question</a>
+                </p>
+            </div>
+            <%questions.forEach(function(question){%>
+                <div>
+                    <h4><a href="/questions/<%=question._id%>"><%=question.title%></a></h4>
+                    <div>
+                        <% if (question.body.length > 144){%>
+                            <%=question.body.substring(0, 144) + "..."%>
+                        <%} else { %>
+                            <%=question.body%>
+                        <%}%>
+                        <hr>
+                    </div>
+                </div>   
+            <%});%>
+            <a href="/">Go Home</a>
+        </div>   
+    </div>
+    
+<%-include("partials/footer")%>

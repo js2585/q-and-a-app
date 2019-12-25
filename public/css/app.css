@@ -1,0 +1,32 @@
+.ask-btn{
+    text-align: right;
+    margin: auto;
+    float: right;
+    margin-right: 2%;
+}
+.indexContainer{
+    margin: 0 0 2% 0;
+}
+.grid{
+    display: flex;
+}
+.headline{
+    box-sizing: inherit;
+}
+.questionBox{
+    width: 30%;
+}
+.sideNav{
+    margin: 0;
+    padding: 0;
+}
+.inline{
+    display: inline;
+}
+body{
+    padding-top: 70px;
+}
+.fixed{
+    position: fixed;
+    width: 170px;
+}
