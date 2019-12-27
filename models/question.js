@@ -7,7 +7,14 @@ var questionSchema = new mongoose.Schema({
     answers: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Answer"
-    }]  
+    }],
+    author: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        username: String
+    }  
 });
 
 module.exports = new mongoose.model("Question", questionSchema);

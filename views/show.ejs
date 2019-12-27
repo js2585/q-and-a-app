@@ -1,38 +1,42 @@
 <%-include("partials/header")%>
 <div class="indexContainer">
-    <div class="row">
-        <div class="col-lg-9">
-            <div class="grid">
-                <h1 class="headline"><%=question.title%></h1>
-                <p class="ask-btn">
-                    <a class="btn btn-primary btn-md" href="/questions/ask">Ask a Question</a>
-                </p>
-            </div>
-    
+    <div class="row col-lg-9">
+        <div class="grid">
+            <h1 class="headline"><%=question.title%></h1>
+            <p class="ask-btn">
+                <a class="btn btn-primary btn-md" href="/questions/ask">Ask a Question</a>
+            </p>
+        </div>
+        <div>
             <p><%=question.body%></p>
-            
+            <p class="author"><em>Asked By <%=question.author.username%></em></p>
+    
             <form class="inline" action="/questions/<%=question._id%>?_method=DELETE" method="POST">
                 <button>Delete</button>
             </form>
-
-            <a href="/questions/<%=question._id%>/edit"><button>Edit</button></a>
+    
+            <form class="inline" action="/questions/<%=question._id%>/edit">
+                <button>Edit</button>
+            </form>
             <h4><%=question.answers.length%> Answers</h4>
             <hr>
-        
-            <%question.answers.forEach(function(answer){%>
-                <p><%=answer.text%></p>
-                <hr>
-            <%});%>
-            
-            
-            <form action="/questions/<%=question._id%>/answers" method="POST">
-                <label for="Answer"><h4>Your Answer</h4></label>
-                <div class="form-group">
-                    <textarea class="form-control" name="answer" id="Answer" rows="10"></textarea>
-                </div>
-                <input class="btn btn-primary btn-md" type="submit" value="Post Answer">
-            </form>
         </div>
+        
+    
+        <%question.answers.forEach(function(answer){%>
+            <p><%=answer.text%></p>
+            <p class="author"><em>Answered By <%=answer.author.username%></em></p>
+            <hr>
+        <%});%>
+        
+        
+        <form action="/questions/<%=question._id%>/answers" method="POST">
+            <label for="Answer"><h4>Your Answer</h4></label>
+            <div class="form-group">
+                <textarea class="form-control" name="answer" id="Answer" rows="10"></textarea>
+            </div>
+            <input class="btn btn-primary btn-md" type="submit" value="Post Answer">
+        </form>
     </div>
 </div>
 

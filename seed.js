@@ -42,33 +42,33 @@ var data = [
 
 function seedDB(){
     Question.deleteMany({}, function(err){
-        if(err){
-            console.log(err)
-        } else {
-            console.log("Removed Questions");
-            data.forEach(function(q){
-                Question.create(q, function(err, question){
-                    if (err){
-                        console.log(err);
-                    } else {
-                        console.log("Created Question");
-                        Answer.create({
-                            text: "Test Answer",
-                            author: "Jatong"
-                        }, function(err, answer){
-                            if (err){
-                                console.log(err);
-                            } else {
-                                question.answers.push(answer);
-                                question.save();
-                                console.log("Answer Created");
-                            }
-                        });
+        // if(err){
+        //     console.log(err)
+        // } else {
+        //     console.log("Removed Questions");
+        //     data.forEach(function(q){
+        //         Question.create(q, function(err, question){
+        //             if (err){
+        //                 console.log(err);
+        //             } else {
+        //                 console.log("Created Question");
+        //                 Answer.create({
+        //                     text: "Test Answer",
+        //                     author: "Jatong"
+        //                 }, function(err, answer){
+        //                     if (err){
+        //                         console.log(err);
+        //                     } else {
+        //                         question.answers.push(answer);
+        //                         question.save();
+        //                         console.log("Answer Created");
+        //                     }
+        //                 });
 
-                    }
-                });
-            });
-        }
+        //             }
+        //         });
+        //     });
+        // }
     });
 }
 

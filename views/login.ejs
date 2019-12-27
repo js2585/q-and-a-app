@@ -1,13 +1,26 @@
 <%-include("partials/header2")%>
 
-<h1>Log in</h1>
-
-<form action="/login" method="POST">
-    <label for="Username">Username: </label>
-    <input type="text" name="username" id="Username">
-    <label for="Password">Password: </label>
-    <input type="password" name="password" id="Password">
-    <button>Log In</button>
-</form>
+<div class="container">
+    <div class="login">
+        <h1 style="text-align: center">Log In</h1>
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="Username">Username </label>
+                <div>
+                    <input class="form" type="text" name="username" id="Username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Password">Password </label>
+                <div>
+                    <input class="form" type="password" name="password" id="Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <input class="btn btn-primary btn-md form" type="submit" value="Sign Up">
+            </div>
+        </form>
+    </div>
+</div>
 
 <%-include("partials/footer2")%>
