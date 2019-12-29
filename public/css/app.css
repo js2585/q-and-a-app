@@ -5,7 +5,7 @@
     margin-right: 2%;
 }
 .indexContainer{
-    margin: 0 0 2% 0;
+    margin: 0 0 5% 0;
 }
 .grid{
     display: flex;
@@ -30,6 +30,7 @@ body{
 }
 .author{
     text-align: right;
+    margin-right: 0;
 }
 .login{
     width: 200px;
@@ -38,4 +39,16 @@ body{
 .form{
     width: 100%;
     margin: 0;
+}
+button{
+    background: none;
+    border: none;
+    padding: 0;
+    color: rgb(124, 125, 128);
+}
+button:hover{
+    color: rgb(203, 204, 204);
+}
+.whiteSpace{
+    white-space: pre-wrap;
 }

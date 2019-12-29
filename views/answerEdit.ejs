@@ -1,0 +1,15 @@
+<%-include("partials/header")%>
+<div class="row col-lg-9 indexContainer">
+    <h1>Edit Answer</h1>
+
+    <form action="/questions/<%=questionId%>/answers/<%=answer._id%>?_method=PUT" method="POST">
+        <label for="Answer"><h4>Your Answer</h4></label>
+        <div class="form-group">
+            <textarea class="form-control" name="answer" id="Answer" value="<%=answer.text%>" rows="10"><%=answer.text%></textarea>
+        </div>
+        <input class="btn btn-primary btn-md" type="submit" value="Update Answer">
+    </form>
+    <a href="/questions/<%=questionId%>">Cancel</a>
+</div>
+
+<%-include("partials/footer")%>

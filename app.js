@@ -28,7 +28,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // seedDB();
-mongoose.connect("mongodb://localhost/parsons_road", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb://localhost/parsons_road", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;

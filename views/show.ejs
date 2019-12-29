@@ -1,6 +1,5 @@
 <%-include("partials/header")%>
-<div class="indexContainer">
-    <div class="row col-lg-9">
+    <div class="row col-lg-9 indexContainer">
         <div class="grid">
             <h1 class="headline"><%=question.title%></h1>
             <p class="ask-btn">
@@ -8,24 +7,35 @@
             </p>
         </div>
         <div>
-            <p><%=question.body%></p>
+            <p class="whiteSpace"><%=question.body%></p>
             <p class="author"><em>Asked By <%=question.author.username%></em></p>
-    
-            <form class="inline" action="/questions/<%=question._id%>?_method=DELETE" method="POST">
-                <button>Delete</button>
-            </form>
-    
-            <form class="inline" action="/questions/<%=question._id%>/edit">
-                <button>Edit</button>
-            </form>
+
+            <%if (currentUser && currentUser._id.equals(question.author.id)){%>
+                <form class="inline" action="/questions/<%=question._id%>?_method=DELETE" method="POST">
+                    <button>Delete</button>
+                </form>
+        
+                <form class="inline" action="/questions/<%=question._id%>/edit">
+                    <button>Edit</button>
+                </form>
+            <%}%>   
+
             <h4><%=question.answers.length%> Answers</h4>
             <hr>
         </div>
         
     
         <%question.answers.forEach(function(answer){%>
-            <p><%=answer.text%></p>
+            <p class="whiteSpace"><%=answer.text%></p>
             <p class="author"><em>Answered By <%=answer.author.username%></em></p>
+            <%if (currentUser._id.equals(answer.author.id) && currentUser){%>
+                <form class="inline" action="/questions/<%=question._id%>/answers/<%=answer._id%>/?_method=DELETE" method="POST">
+                    <button>Delete</button>
+                </form>
+                <form class="inline" action="/questions/<%=question._id%>/answers/<%=answer._id%>/edit">
+                    <button>Edit</button>
+                </form>
+            <%}%>
             <hr>
         <%});%>
         
@@ -38,7 +48,6 @@
             <input class="btn btn-primary btn-md" type="submit" value="Post Answer">
         </form>
     </div>
-</div>
 
 
 
