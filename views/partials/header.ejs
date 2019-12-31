@@ -30,7 +30,7 @@
                         <li><a href="/login">Log In</a></li>
                         <li><a href="/register">Sign Up</a></li>
                     <%} else {%>
-                        <li><a href="/"><%=currentUser.username%></a></li>
+                        <li><a href="/users/<%=currentUser._id%>"><%=currentUser.username%></a></li>
                         <li><a href="/logout">Log Out</a></li>
                     <%}%>
                 </ul>
@@ -43,7 +43,7 @@
                 <div class="list-group fixed">
                     <li class="list-group-item"><a href="/">Home</a></li>
                     <li class="list-group-item"><a href="/questions">Questions</a></li>
-                    <li class="list-group-item"><a href="/questions">Courses</a></li>
+                    <li class="list-group-item"><a href="/courses">Courses</a></li>
                 </div>
                 <!-- <nav class="navbar navbar-default navbar-fixed-side sideNav"> -->
                     <!-- normal collapsible navbar markup -->
@@ -57,5 +57,17 @@
                 </nav> -->
             </div>
             <div class="col-sm-2 col-lg-10">
+                <div class="row col-lg-9 indexContainer">
+                    <%if (error && error.length > 0){%>
+                        <div class="alert alert-danger" role="alert">
+                            <%=error%>
+                        </div>
+                    <%}%>
+                    <%if (success && success.length > 0){%>
+                        <div class="alert alert-success" role="alert">
+                            <%=success%>
+                        </div>
+                    <%}%>
+                        
 
 

@@ -1,0 +1,15 @@
+<%-include("partials/header")%>
+
+    <div class="grid">
+        <h1 class="headline">Courses</h1>
+        <p class="ask-btn">
+            <a class="btn btn-primary btn-md" href="/questions/ask">Ask a Question</a>
+        </p>
+    </div>
+    <%courses.forEach(function(course){%>
+        <% var name = course.name.replace(/\s+/g, '-').toLowerCase() %>
+        <a class="btn btn-primary btn-sm" href="/courses/<%=name%>"><%=course.name.toUpperCase()%></a>
+    <%})%>
+
+
+<%-include("partials/footer")%>

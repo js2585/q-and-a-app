@@ -3,7 +3,7 @@ var router = express.Router();
 var Question = require("../models/question");
 var Answer = require("../models/answer");
 var mongoose = require("mongoose");
-var middleware = require("../middleware")
+var middleware = require("../middleware");
 
 router.post("/questions/:id/answers", middleware.isLoggedIn, (req, res)=>{
     Question.findById(mongoose.Types.ObjectId(req.params.id), function(err, question){
@@ -19,6 +19,7 @@ router.post("/questions/:id/answers", middleware.isLoggedIn, (req, res)=>{
                     ans.save();
                     question.answers.push(ans);
                     question.save();
+                    req.flash("success", "Answer Posted");
                     res.redirect("/questions/" + question._id);
                 }
             });
@@ -44,6 +45,7 @@ router.put("/questions/:id/answers/:answerId", middleware.checkAnswerOwnership, 
             console.log(err);
             res.redirect("back");
         } else {
+            req.flash("success", "Answer Updated");
             res.redirect("/questions/" + req.params.id);
         }
     });
@@ -55,6 +57,7 @@ router.delete("/questions/:id/answers/:answerId", middleware.checkAnswerOwnershi
             console.log(err);
             res.redirect("back");
         } else {
+            req.flash("success", "Answer Deleted");
             res.redirect("/questions/" + req.params.id);
         }
     });

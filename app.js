@@ -8,10 +8,13 @@ var express = require("express"),
     seedDB = require("./seed"),
     LocalStrategy = require("passport-local"),
     passport = require("passport"),
+    flash = require("connect-flash"),
+    Course = require("./models/course"),
     User = require("./models/user");
 var questionRoutes = require("./routes/questions"),
     answerRoutes = require("./routes/answers"),
-    indexRoutes = require("./routes/index");
+    indexRoutes = require("./routes/index"),
+    courseRoutes = require("./routes/courses");
 var PORT = 3001;
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -23,20 +26,24 @@ app.use(require("express-session")({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// seedDB();
+seedDB();
 mongoose.connect("mongodb://localhost/parsons_road", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     next();
 });
 app.use(questionRoutes);
 app.use(answerRoutes);
 app.use(indexRoutes);
+app.use(courseRoutes);
 
 
 

@@ -1,5 +1,6 @@
 var Question = require("../models/question");
 var Answer = require("../models/answer");
+var User = require("../models/user");
 var mongoose = require("mongoose");
 var middlewareObj = {};
 
@@ -17,7 +18,7 @@ middlewareObj.checkQuestionOwnership = function(req, res, next){
             }
         });
     } else {
-        res.redirect("back");
+        res.redirect("/login");
     }
 }
 
@@ -35,7 +36,26 @@ middlewareObj.checkAnswerOwnership = function(req, res, next){
             }
         });
     } else {
-        res.redirect("back");
+        res.redirect("/login");
+    }
+}
+
+middlewareObj.checkUser = function(req, res, next){
+    if (req.isAuthenticated()){
+        User.findById(mongoose.Types.ObjectId(req.params.id), function(err, found){
+            if (err){
+                req.flash("error", "Something Went Wrong");
+                res.redirect("/");
+            } else {
+                if (req.user._id.equals(found._id)){
+                    next();
+                } else {
+                    res.redirect("back");
+                }
+            }
+        });
+    } else {
+        res.redirect("/");
     }
 }
 

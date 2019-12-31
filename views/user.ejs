@@ -1,0 +1,30 @@
+<%-include("partials/header")%>
+<h1>Welcome <%=user.username%></h1>
+
+<hr>
+
+<h3>Your Questions</h3>
+<%questions.forEach(function(question){%>
+    <h4><a href="/questions/<%=question._id%>"><%=question.title%></a></h4>
+    <div>
+        <% if (question.body.length > 144){%>
+            <h5><%=question.body.substring(0, 144) + "..."%></h5>
+        <%} else { %>
+            <h5><%=question.body%></h5>
+        <%}%>
+        <div class="grid">
+            <form action="/courses/<%=question.course.name%>">
+                <button><%=question.course.name.toUpperCase()%></button>
+            </form>
+            <% var date = question.date; %>
+            <% var month = date.getUTCMonth() + 1; %>
+            <% var day = date.getUTCDate(); %>
+            <% var year = date.getUTCFullYear(); %>
+            <% var newDate = month + "/" + day + "/" + year; %>
+            <p class="rightAlign">Asked on <%=newDate%></p>
+        </div>
+        <hr>
+    </div>
+<%})%>
+
+<%-include("partials/footer")%>

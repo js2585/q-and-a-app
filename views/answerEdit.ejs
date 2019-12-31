@@ -1,5 +1,4 @@
 <%-include("partials/header")%>
-<div class="row col-lg-9 indexContainer">
     <h1>Edit Answer</h1>
 
     <form action="/questions/<%=questionId%>/answers/<%=answer._id%>?_method=PUT" method="POST">
@@ -10,6 +9,5 @@
         <input class="btn btn-primary btn-md" type="submit" value="Update Answer">
     </form>
     <a href="/questions/<%=questionId%>">Cancel</a>
-</div>
 
 <%-include("partials/footer")%>
