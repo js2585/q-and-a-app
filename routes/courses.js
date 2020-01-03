@@ -13,7 +13,7 @@ router.get("/courses", middleware.isLoggedIn, (req, res)=>{
 });
 
 router.get("/courses/:name", middleware.isLoggedIn, (req, res)=>{
-    var pagination = 3;
+    var pagination = 10;
     var page = req.query.page ? parseInt(req.query.page) : 1;
     var name = req.params.name.replace(/-/g, " ");
     Course.findOne({name: name}).populate("questions").exec(function(err, course){

@@ -38,17 +38,17 @@
             <% var name = course.name.replace(/\s+/g, '-').toLowerCase() %>
             <% var maxPage = Math.ceil(course.questions.length / pagination)%>
             <% if (page > 1){ %>
-                <a href="/courses/<%name%>?page=<%=page - 1%>" aria-label="Previous">
+                <a href="/courses/<%=name%>?page=<%=page - 1%>" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             <%}%> 
             </li>
-            <li><a href="/courses/<%name%>?page=1">First</a></li>
-            <li><a href="/questions/?page=<%=maxPage%>">Last</a></li>
+            <li><a href="/courses/<%=name%>?page=1">First</a></li>
+            <li><a href="/courses/<%=name%>?page=<%=maxPage%>">Last</a></li>
             
             <li>
             <% if(page < maxPage) { %>
-                <a href="/courses/<%name%>?page=<%=page + 1%>" aria-label="Next">
+                <a href="/courses/<%=name%>?page=<%=page + 1%>" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             <%}%>

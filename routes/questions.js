@@ -6,7 +6,7 @@ var Answer = require("../models/answer");
 var mongoose = require("mongoose");
 var middleware = require("../middleware");
 router.get("/questions", middleware.isLoggedIn, (req, res)=>{
-    var pagination = 3;
+    var pagination = 10;
     var page = req.query.page ? parseInt(req.query.page) : 1;
     Question.countDocuments({}, function(err, count){
         Question.find({}, function(err, questions){
