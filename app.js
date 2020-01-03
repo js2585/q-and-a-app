@@ -32,8 +32,8 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // seedDB();
-mongoose.connect("mongodb://localhost/parsons_road", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
-
+// mongoose.connect("mongodb://localhost/parsons_road", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+mongoose.connect("mongodb+srv://appleseed:DZwYgKdgV0v21pdL@cluster0-urjzm.mongodb.net/parsons_road?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false})
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
