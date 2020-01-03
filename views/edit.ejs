@@ -5,19 +5,19 @@
             <div class="form-group">
                 <label for="Title">Title</label>
                 <div>
-                    <input class="form-control" type="text" name="q[title]" id="Title" value="<%=question.title%>">
+                    <input class="form-control" type="text" name="q[title]" id="Title" value="<%=question.title%>" required="true" minlength="15" maxlength="60">
                 </div>
             </div>
             <div class="form-group">
                 <label for="Body">Body</label>
                 <div>
-                    <textarea class="form-control" name="q[body]" id="Body" rows="10" value="<%=question.body%>"><%=question.body%></textarea>
+                    <textarea class="form-control" name="q[body]" id="Body" rows="10" value="<%=question.body%>" required="true" minlength="15"><%=question.body%></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label for="Course">Course</label>
                 <div>
-                    <input class="form-control" type="text" name="q[course]" id="Course" value="<%=question.course.name%>">
+                    <input class="form-control" type="text" name="q[course]" id="Course" value="<%=question.course.name%>" required="true">
                 </div>
             </div>
             <div class="form-group">

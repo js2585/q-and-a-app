@@ -1,32 +1,59 @@
 <%-include("partials/header")%>
     <div class="grid">
-        <h1 class="headline"><%=course.name.toUpperCase()%> Questions</h1>
+        <h1 class="headline"><%=course.name%> Questions</h1>
         <p class="ask-btn">
             <a class="btn btn-primary btn-md" href="/questions/ask">Ask a Question</a>
         </p>
     </div>
-    <%course.questions.sort(function(a, b){return -(a.date.getTime() - b.date.getTime())}); %>
-    <%course.questions.forEach(function(question){%>
-        <div>
-            <h4><a href="/questions/<%=question._id%>"><%=question.title%></a></h4>
+    <h3><%=course.questions.length%> Questions</h3>
+    <hr>
+    <%for (var i = pagination * (page - 1); i < pagination * page; i ++){%>
+        <%if (i < course.questions.length){ %>
+            <%question = course.questions[i];%>
             <div>
-                <% if (question.body.length > 144){%>
-                    <%=question.body.substring(0, 144) + "..."%>
-                <%} else { %>
-                    <%=question.body%>
-                <%}%>
-                <div class="grid">
-                    <% var date = question.date; %>
-                    <% var month = date.getUTCMonth() + 1; %>
-                    <% var day = date.getUTCDate(); %>
-                    <% var year = date.getUTCFullYear(); %>
-                    <% var newDate = month + "/" + day + "/" + year; %>
-                    <p class="rightAlign">Asked on <%=newDate%></p>
+                <h4><a href="/questions/<%=question._id%>"><%=question.title%></a></h4>
+                <div>
+                    <% if (question.body.length > 144){%>
+                        <%=question.body.substring(0, 144) + "..."%>
+                    <%} else { %>
+                        <%=question.body%>
+                    <%}%>
+                    <div class="grid">
+                        <% var date = question.date; %>
+                        <% var month = date.getUTCMonth() + 1; %>
+                        <% var day = date.getUTCDate(); %>
+                        <% var year = date.getUTCFullYear(); %>
+                        <% var newDate = month + "/" + day + "/" + year; %>
+                        <p class="rightAlign">Asked on <%=newDate%></p>
+                    </div>
+                    <hr>
                 </div>
-                <hr>
-            </div>
-        </div>   
-    <%});%>
+            </div>  
+        <%}%>
+    <%}%>
     <a href="/">Go Home</a>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li>
+            <% var name = course.name.replace(/\s+/g, '-').toLowerCase() %>
+            <% var maxPage = Math.ceil(course.questions.length / pagination)%>
+            <% if (page > 1){ %>
+                <a href="/courses/<%name%>?page=<%=page - 1%>" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            <%}%> 
+            </li>
+            <li><a href="/courses/<%name%>?page=1">First</a></li>
+            <li><a href="/questions/?page=<%=maxPage%>">Last</a></li>
+            
+            <li>
+            <% if(page < maxPage) { %>
+                <a href="/courses/<%name%>?page=<%=page + 1%>" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            <%}%>
+            </li>
+        </ul>
+    </nav>
     
 <%-include("partials/footer")%>

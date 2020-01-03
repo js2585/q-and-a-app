@@ -9,6 +9,12 @@ var answerSchema = mongoose.Schema({
         },
         username: String
     },
+    upvotes: [{
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+    }],
     date: {type: Date, default: Date.now}  
 });
 

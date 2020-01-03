@@ -27,6 +27,29 @@ router.post("/questions/:id/answers", middleware.isLoggedIn, (req, res)=>{
     });
 });
 
+router.post("/questions/:id/answers/:answerId", middleware.isLoggedIn, (req, res)=>{
+    Answer.findById(mongoose.Types.ObjectId(req.params.answerId), function(err, answer){
+        if (err){
+            console.log(err);
+            req.flash("error", "Something Went Wrong");
+            res.redirect("back");
+        } else {
+            var remove = false;
+            answer.upvotes.forEach(function(user, index, arr){
+                if (user.equals(req.user._id)){
+                    arr.splice(index, 1);
+                    remove = true;
+                }
+            });
+            if (!remove){
+                answer.upvotes.push(req.user);
+            }
+            answer.save();
+            res.json(answer);
+        }
+    });
+});
+
 router.get("/questions/:id/answers/:answerId/edit", middleware.checkAnswerOwnership, (req, res)=>{
     Answer.findById(mongoose.Types.ObjectId(req.params.answerId), function(err, answer){
         if (err){

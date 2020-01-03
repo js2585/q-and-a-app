@@ -13,9 +13,8 @@
             <h5><%=question.body%></h5>
         <%}%>
         <div class="grid">
-            <form action="/courses/<%=question.course.name%>">
-                <button><%=question.course.name.toUpperCase()%></button>
-            </form>
+            <% var name = question.course.name.replace(/\s+/g, '-').toLowerCase() %>
+            <a class="btn btn-primary btn-sm course" href="/courses/<%=name%>"><%=question.course.name%></a>            
             <% var date = question.date; %>
             <% var month = date.getUTCMonth() + 1; %>
             <% var day = date.getUTCDate(); %>

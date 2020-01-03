@@ -6,13 +6,17 @@ var Answer = require("../models/answer");
 var mongoose = require("mongoose");
 var middleware = require("../middleware");
 router.get("/questions", middleware.isLoggedIn, (req, res)=>{
-    Question.find({}, function(err, questions){
-        if (err){
-            console.log(err);
-        } else {
-            res.render("questions.ejs", {questions: questions});
-        }
-    })
+    var pagination = 3;
+    var page = req.query.page ? parseInt(req.query.page) : 1;
+    Question.countDocuments({}, function(err, count){
+        Question.find({}, function(err, questions){
+            if (err){
+                console.log(err);
+            } else {
+                res.render("questions.ejs", {questions: questions, total: count, page: page, pagination: pagination});
+            }
+        }).sort({date: -1}).skip((page - 1) * pagination).limit(pagination);
+    });
 });
 
 router.post("/questions", middleware.isLoggedIn, (req, res)=>{
@@ -55,6 +59,23 @@ router.get("/questions/:id", middleware.isLoggedIn, (req, res)=>{
         if (err){
             console.log(err);
         } else {
+            response.answers.sort(function(a, b){
+                if (a.upvotes.length < b.upvotes.length){
+                    return 1;
+                } 
+                if (a.upvotes.length > b.upvotes.length){
+                    return -1;
+                } else {
+                    if (a.date < b.date){
+                        return 1;
+                    }
+                    if (a.date > b.date){
+                        return -1;
+                    } else {
+                        return 0;
+                    }
+                }
+            });
             res.render("show.ejs", {question: response});
         }
     });

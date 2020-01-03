@@ -5,9 +5,8 @@
             <a class="btn btn-primary btn-md" href="/questions/ask">Ask a Question</a>
         </p>
     </div>
-    <% console.log(questions)%>
-    <% questions.sort(function(a, b){return -(a.date.getTime() - b.date.getTime())}); %>
-    <% console.log(questions)%>
+    <h3><%=total%> Questions</h3>
+    <hr>
     <%questions.forEach(function(question){%>
         <div>
             <h4><a href="/questions/<%=question._id%>"><%=question.title%></a></h4>
@@ -18,9 +17,8 @@
                     <h5><%=question.body%></h5>
                 <%}%>
                 <div class="grid">
-                    <form action="/courses/<%=question.course.name%>">
-                        <button><%=question.course.name.toUpperCase()%></button>
-                    </form>
+                    <% var name = question.course.name.replace(/\s+/g, '-').toLowerCase() %>
+                    <a class="btn btn-primary btn-sm course" href="/courses/<%=name%>"><%=question.course.name%></a>
                     <% var date = question.date; %>
                     <% var month = date.getUTCMonth() + 1; %>
                     <% var day = date.getUTCDate(); %>
@@ -33,5 +31,27 @@
         </div>   
     <%});%>
     <a href="/">Go Home</a>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li>
+            <% var maxPage = Math.ceil(total / pagination)%>
+            <% if (page > 1){ %>
+                <a href="/questions/?page=<%=page - 1%>" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            <%}%> 
+            </li>
+            <li><a href="/questions/?page=1">First</a></li>
+            <li><a href="/questions/?page=<%=maxPage%>">Last</a></li>
+            
+            <li>
+            <% if(page < maxPage) { %>
+                <a href="/questions/?page=<%=page + 1%>" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            <%}%>
+            </li>
+        </ul>
+    </nav>
     
 <%-include("partials/footer")%>

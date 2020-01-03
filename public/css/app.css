@@ -19,6 +19,9 @@
 .headline{
     box-sizing: inherit;
 }
+.largeText{
+    font-size: 30px;
+}
 
 .sideNav{
     margin: 0;
@@ -57,4 +60,14 @@ button:hover{
 }
 .whiteSpace{
     white-space: pre-wrap;
+}
+.course{
+    padding: 2px 5px;
+    background-color: #cfeafe;
+    color: #5b8db1;
+    border: none;
+}
+.course:hover{
+    background-color: #addafc;
+    color: #5b8db1;
 }

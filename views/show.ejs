@@ -1,61 +1,73 @@
 <%-include("partials/header")%>
+    <div class="grid">
+        <p class="headline largeText">
+            <%=question.title%>
+        </p>
+        <p class="ask-btn">
+            <a class="btn btn-primary btn-md" href="/questions/ask">Ask a Question</a>
+        </p>
+    </div>
+    <div>
+        <p class="whiteSpace"><%=question.body%></p>
+        <% var date = question.date; %>
+        <% var month = date.getUTCMonth() + 1; %>
+        <% var day = date.getUTCDate(); %>
+        <% var year = date.getUTCFullYear(); %>
+        <% var newDate = month + "/" + day + "/" + year; %>
         <div class="grid">
-            <h1 class="headline"><%=question.title%></h1>
-            <p class="ask-btn">
-                <a class="btn btn-primary btn-md" href="/questions/ask">Ask a Question</a>
-            </p>
+            <% var name = question.course.name.replace(/\s+/g, '-').toLowerCase() %>
+            <a class="btn btn-primary btn-sm course" href="/courses/<%=name%>"><%=question.course.name%></a>
+            <p class="rightAlign">Asked By <em><%=question.author.username%></em> on <%=newDate%></p>
         </div>
-        <div>
-            <p class="whiteSpace"><%=question.body%></p>
-            <% var date = question.date; %>
-            <% var month = date.getUTCMonth() + 1; %>
-            <% var day = date.getUTCDate(); %>
-            <% var year = date.getUTCFullYear(); %>
-            <% var newDate = month + "/" + day + "/" + year; %>
-            <p class="author">Asked By <em><%=question.author.username%></em> on <%=newDate%></p>
-            
-            <%if (currentUser && currentUser._id.equals(question.author.id)){%>
-                <form class="inline" action="/questions/<%=question._id%>?_method=DELETE" method="POST">
-                    <button>Delete</button>
-                </form>
-        
-                <form class="inline" action="/questions/<%=question._id%>/edit">
-                    <button>Edit</button>
-                </form>
-            <%}%>   
 
-            <h4><%=question.answers.length%> Answers</h4>
-            <hr>
-        </div>
-        
-        
-        <%question.answers.forEach(function(answer){%>
-            <% var date2 = answer.date; %>
-            <% var month = date2.getUTCMonth() + 1; %>
-            <% var day = date2.getUTCDate(); %>
-            <% var year = date2.getUTCFullYear(); %>
-            <% var newDate2 = month + "/" + day + "/" + year; %>
-            <p class="whiteSpace"><%=answer.text%></p>
-            <p class="author">Answered By <em><%=answer.author.username%></em> on <%=newDate2%></p>
-            <%if (currentUser._id.equals(answer.author.id) && currentUser){%>
-                <form class="inline" action="/questions/<%=question._id%>/answers/<%=answer._id%>/?_method=DELETE" method="POST">
-                    <button>Delete</button>
-                </form>
-                <form class="inline" action="/questions/<%=question._id%>/answers/<%=answer._id%>/edit">
-                    <button>Edit</button>
-                </form>
-            <%}%>
-            <hr>
-        <%});%>
-        
-        
-        <form action="/questions/<%=question._id%>/answers" method="POST">
-            <label for="Answer"><h4>Your Answer</h4></label>
-            <div class="form-group">
-                <textarea class="form-control" name="answer" id="Answer" rows="10"></textarea>
-            </div>
-            <input class="btn btn-primary btn-md" type="submit" value="Post Answer">
+        <%if (currentUser && currentUser._id.equals(question.author.id)){%>
+            <form class="inline" action="/questions/<%=question._id%>?_method=DELETE" method="POST">
+                <button>Delete</button>
+            </form>
+    
+            <form class="inline" action="/questions/<%=question._id%>/edit">
+                <button>Edit</button>
+            </form>
+        <%}%>   
+
+        <h4><%=question.answers.length%> Answers</h4>
+        <hr>
+    </div>
+    
+    <%question.answers.forEach(function(answer, index){%>
+        <% var date2 = answer.date; %>
+        <% var month = date2.getUTCMonth() + 1; %>
+        <% var day = date2.getUTCDate(); %>
+        <% var year = date2.getUTCFullYear(); %>
+        <% var newDate2 = month + "/" + day + "/" + year; %>
+        <p class="whiteSpace"><%=answer.text%></p>
+        <p class="author">Answered By <em><%=answer.author.username%></em> on <%=newDate2%></p>
+        <%if (currentUser._id.equals(answer.author.id) && currentUser){%>
+            <form class="inline" action="/questions/<%=question._id%>/answers/<%=answer._id%>/?_method=DELETE" method="POST">
+                <button>Delete</button>
+            </form>
+            <form class="inline" action="/questions/<%=question._id%>/answers/<%=answer._id%>/edit">
+                <button>Edit</button>
+            </form>
+        <%}%>
+        <form class="inline upvote" action="/questions/<%=question._id%>/answers/<%=answer._id%>" method="POST">
+            <button><span id="<%=answer._id%>"><%=answer.upvotes.length%></span> Upvotes</button>
         </form>
+        <hr>
+    <%});%>
+    
+    
+
+    <form action="/questions/<%=question._id%>/answers" method="POST">
+        <label for="Answer"><h4>Your Answer</h4></label>
+        <div class="form-group">
+            <textarea class="form-control" name="answer" id="Answer" rows="10" minlength="15" required="true"></textarea>
+        </div>
+        <input class="btn btn-primary btn-md" type="submit" value="Post Answer">
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/js/upvote.js"></script>
 
 
 

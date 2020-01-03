@@ -8,7 +8,7 @@
     </div>
     <%courses.forEach(function(course){%>
         <% var name = course.name.replace(/\s+/g, '-').toLowerCase() %>
-        <a class="btn btn-primary btn-sm" href="/courses/<%=name%>"><%=course.name.toUpperCase()%></a>
+        <a class="btn btn-primary btn-sm course" href="/courses/<%=name%>"><%=course.name%></a>
     <%})%>
 
 
