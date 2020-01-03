@@ -15,7 +15,7 @@ var questionRoutes = require("./routes/questions"),
     answerRoutes = require("./routes/answers"),
     indexRoutes = require("./routes/index"),
     courseRoutes = require("./routes/courses");
-var PORT = 3000;
+var PORT = 80;
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOveride("_method"));
