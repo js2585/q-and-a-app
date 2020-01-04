@@ -1,16 +1,19 @@
 <%-include("partials/header")%>
     <div class="grid">
-        <h1 class="headline"><%=course.name%> Questions</h1>
+        <h1 class="headline"><%=courseName%> Questions</h1>
         <p class="ask-btn">
             <a class="btn btn-primary btn-md" href="/questions/ask">Ask a Question</a>
         </p>
     </div>
-    <h3><%=course.questions.length%> Questions</h3>
+    <h3><%=total%> Questions</h3>
     <hr>
-    <%for (var i = pagination * (page - 1); i < pagination * page; i ++){%>
-        <%if (i < course.questions.length){ %>
-            <%question = course.questions[i];%>
-            <div>
+    <%questions.forEach(function(question){%>
+        <div class="row">
+            <div class="col-lg-1 grayFont">
+                <h3><%=question.answers.length%></h3>
+                <p>Answers</p>
+            </div>
+            <div class="col-lg-11">
                 <h4><a href="/questions/<%=question._id%>"><%=question.title%></a></h4>
                 <div>
                     <% if (question.body.length > 144){%>
@@ -26,17 +29,19 @@
                         <% var newDate = month + "/" + day + "/" + year; %>
                         <p class="rightAlign">Asked on <%=newDate%></p>
                     </div>
-                    <hr>
                 </div>
             </div>  
-        <%}%>
-    <%}%>
+        </div>
+        <hr>
+    <%})%>
+            
+        
     <a href="/">Go Home</a>
     <nav aria-label="Page navigation">
         <ul class="pagination">
             <li>
-            <% var name = course.name.replace(/\s+/g, '-').toLowerCase() %>
-            <% var maxPage = Math.ceil(course.questions.length / pagination)%>
+            <% var name = courseName.replace(/\s+/g, '-').toLowerCase() %>
+            <% var maxPage = Math.ceil(total / pagination)%>
             <% if (page > 1){ %>
                 <a href="/courses/<%=name%>?page=<%=page - 1%>" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>

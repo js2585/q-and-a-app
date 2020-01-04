@@ -16,16 +16,28 @@ router.get("/courses/:name", middleware.isLoggedIn, (req, res)=>{
     var pagination = 10;
     var page = req.query.page ? parseInt(req.query.page) : 1;
     var name = req.params.name.replace(/-/g, " ");
-    Course.findOne({name: name}).populate("questions").exec(function(err, course){
-        if (err){
-            console.log(err);
-        } else {
-            if (course){
-                course.questions.sort(function(a, b){return -(a.date - b.date)});
+    Question.countDocuments({"course.name": name}, function(err, count){
+        Question.find({"course.name": name}, function(err, questions){
+            if (err){
+                console.log(err);
+            } else {
+                res.render("filter.ejs", {questions: questions, total: count, page: page, pagination: pagination, courseName: name});
             }
-            res.render("filter.ejs", {course: course, pagination: pagination, page: page});
-        }
+        }).populate("answers").sort({date: -1}).skip((page - 1) * pagination).limit(pagination);
     });
+    // Course.findOne({name: name}).populate("questions").exec(function(err, course){
+    //     if (err){
+    //         console.log(err);
+    //     } else {
+    //         if (course){
+    //             course.questions.sort(function(a, b){return -(a.date - b.date)});
+    //             course.questions.forEach(function(q){
+    //                 q.populate("answers");
+    //             });
+    //         }
+    //         res.render("filter.ejs", {course: course, pagination: pagination, page: page});
+    //     }
+    // });
 });
 
 module.exports = router;
