@@ -33,7 +33,7 @@
 body{
     padding-top: 70px;
 }
-.fixed{
+.col-lg-2.fixed{
     position: fixed;
     width: 170px;
 }

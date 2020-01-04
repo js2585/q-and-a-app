@@ -38,14 +38,15 @@
     </nav>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12 col-lg-2">
+            <div class="col-sm-2 col-lg-2">
                 <div class="list-group fixed">
                     <li class="list-group-item"><a href="/">Home</a></li>
                     <li class="list-group-item"><a href="/questions">Questions</a></li>
                     <li class="list-group-item"><a href="/courses">Courses</a></li>
                 </div>
             </div>
-                <div class="row col-sm-12 col-lg-8 indexContainer">
+            <div class="container-fluid">
+                <div class="row col-sm-8 col-lg-8 indexContainer">
                     <%if (error && error.length > 0){%>
                         <div class="alert alert-danger" role="alert">
                             <%=error%>
