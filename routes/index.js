@@ -56,9 +56,21 @@ router.post("/users/:id/changeUsername", middleware.checkUser, (req, res)=>{
                     req.flash("error", "Username Already Taken");
                     res.redirect("back");
                 } else {
+                    Question.find({"author.username": user.username}, function(err, questions){
+                        questions.forEach(function(q){
+                            q.author.username = req.body.usernameChange;
+                            q.save();
+                        });
+                    });
+                    Answer.find({"author.username": user.username}, function(err, answers){
+                        answers.forEach(function(a){
+                            a.author.username = req.body.usernameChange;
+                            a.save();
+                        });
+                    });
                     user.username = req.body.usernameChange;
                     user.save();
-                    req.flash("success", "Username Chagned");
+                    req.flash("success", "Username Changed");
                     res.redirect("back");
                 }
             });
