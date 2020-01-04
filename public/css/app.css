@@ -33,9 +33,10 @@
 body{
     padding-top: 70px;
 }
-.col-lg-2.fixed{
-    position: fixed;
-    width: 170px;
+.fixed{
+    position: sticky;
+    width: auto;
+    box-sizing: border-box;
 }
 .author{
     text-align: right;
