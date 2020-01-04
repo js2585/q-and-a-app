@@ -35,6 +35,7 @@ body{
 }
 .fixed{
     position: sticky;
+    top: 0;
     width: auto;
     box-sizing: border-box;
 }

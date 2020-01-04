@@ -1,6 +1,11 @@
 <%-include("partials/header")%>
 <h1>Welcome <%=user.username%></h1>
-
+<h3>Change Username</h3>
+<form action="/users/<%=user._id%>/changeUsername" method="POST">
+    <label for="Username">Username: </label>
+    <input type="text" name="usernameChange" id="Username" value="<%=user.username%>">
+    <input type="submit" value="Confirm Changes">
+</form>
 <hr>
 
 <h3>Your Questions</h3>
