@@ -10,25 +10,33 @@
 
 <h3>Your Questions</h3>
 <%questions.forEach(function(question){%>
-    <h4><a href="/questions/<%=question._id%>"><%=question.title%></a></h4>
-    <div>
-        <% if (question.body.length > 144){%>
-            <h5><%=question.body.substring(0, 144) + "..."%></h5>
-        <%} else { %>
-            <h5><%=question.body%></h5>
-        <%}%>
-        <div class="grid">
-            <% var name = question.course.name.replace(/\s+/g, '-').toLowerCase() %>
-            <a class="btn btn-primary btn-sm course" href="/courses/<%=name%>"><%=question.course.name%></a>            
-            <% var date = question.date; %>
-            <% var month = date.getUTCMonth() + 1; %>
-            <% var day = date.getUTCDate(); %>
-            <% var year = date.getUTCFullYear(); %>
-            <% var newDate = month + "/" + day + "/" + year; %>
-            <p class="rightAlign">Asked on <%=newDate%></p>
+    <div class="row">
+        <div class="col-lg-1 grayFont">
+            <h3><%=question.answers.length%></h3>
+            <p>Answers</p>
         </div>
-        <hr>
+        <div class="col-lg-11">
+            <h4><a href="/questions/<%=question._id%>"><%=question.title%></a></h4>
+            <div>
+                <% if (question.body.length > 169){%>
+                    <h5><%=question.body.substring(0, 169) + "..."%></h5>
+                <%} else { %>
+                    <h5><%=question.body%></h5>
+                <%}%>
+                <div class="grid">
+                    <% var name = question.course.name.replace(/\s+/g, '-').toLowerCase() %>
+                    <a class="btn btn-primary btn-sm course" href="/courses/<%=name%>"><%=question.course.name%></a>
+                    <% var date = question.date; %>
+                    <% var month = date.getUTCMonth() + 1; %>
+                    <% var day = date.getUTCDate(); %>
+                    <% var year = date.getUTCFullYear(); %>
+                    <% var newDate = month + "/" + day + "/" + year; %>
+                    <p class="rightAlign">Asked on <%=newDate%></p>
+                </div>
+            </div>
+        </div>
     </div>
+    <hr>
 <%})%>
 
 <%-include("partials/footer")%>

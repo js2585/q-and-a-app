@@ -18,19 +18,13 @@ router.get("/users/:id", middleware.checkUser, (req, res)=>{
             req.flash("error", "Something Went Wrong");
             res.redirect("back");
         } else {
-            var validQuestions = []
-            Question.find({}, function(err, questions){
+            Question.find({"author.id": user._id}, function(err, questions){
                 if (err){
                     console.log(err);
                 } else {
-                    questions.forEach(function(q){
-                        if (q.author.id.equals(user._id)){
-                            validQuestions.push(q);
-                        }
-                    });
-                    res.render("user.ejs", {user: user, questions: validQuestions});
+                    res.render("user.ejs", {user: user, questions: questions});
                 }
-            });
+            }).populate("answers");
         }
     });
 });
