@@ -72,6 +72,22 @@ router.post("/users/:id/changeUsername", middleware.checkUser, (req, res)=>{
     });
 });
 
+//Search Route
+router.get("/search", middleware.isLoggedIn, (req, res)=>{
+    var search = req.query.q;
+    var pagination = 10;
+    var page = req.query.page ? parseInt(req.query.page) : 1;
+    Question.countDocuments({$text: {$search: search}}, function(err, count){
+        Question.find({$text: {$search: search}}, {score: {$meta: "textScore"}}, function(err, questions){
+            if (err){
+                console.log(err);
+            } else {
+                res.render("questions.ejs", {questions: questions, total: count, page: page, pagination: pagination});
+            }
+        }).populate("answers").sort({score: {$meta: "textScore"}}).skip((page - 1) * pagination).limit(pagination);
+    });
+});
+
 //Authorization Routes
 router.get("/register", (req, res)=>{
     res.render("register.ejs");
