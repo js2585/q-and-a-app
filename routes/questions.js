@@ -13,7 +13,7 @@ router.get("/questions", middleware.isLoggedIn, (req, res)=>{
             if (err){
                 console.log(err);
             } else {
-                res.render("questions.ejs", {questions: questions, total: count, page: page, pagination: pagination});
+                res.render("questions.ejs", {questions: questions, total: count, page: page, pagination: pagination, search: false});
             }
         }).populate("answers").sort({date: -1}).skip((page - 1) * pagination).limit(pagination);
     });

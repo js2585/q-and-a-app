@@ -82,7 +82,7 @@ router.get("/search", middleware.isLoggedIn, (req, res)=>{
             if (err){
                 console.log(err);
             } else {
-                res.render("questions.ejs", {questions: questions, total: count, page: page, pagination: pagination});
+                res.render("questions.ejs", {questions: questions, total: count, page: page, pagination: pagination, search: true, q: req.query.q});
             }
         }).populate("answers").sort({score: {$meta: "textScore"}}).skip((page - 1) * pagination).limit(pagination);
     });
