@@ -251,19 +251,20 @@ var data = [
 ]
 
 function seedDB(){
-    Course.deleteMany({}, function(err){
-        if (err){
-            console.log(err);
-        } else {
-            data.forEach(function(course){
-                Course.create(course, function(err, result){
-                    if (err){
-                        console.log(err);
-                    }
-                });
-            });
-        }
-    });
+    
+    // Course.deleteMany({}, function(err){
+    //     if (err){
+    //         console.log(err);
+    //     } else {
+    //         data.forEach(function(course){
+    //             Course.create(course, function(err, result){
+    //                 if (err){
+    //                     console.log(err);
+    //                 }
+    //             });
+    //         });
+    //     }
+    // });
     
     // Question.deleteMany({}, function(err){
     //     // if(err){

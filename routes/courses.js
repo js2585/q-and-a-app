@@ -9,7 +9,7 @@ var middleware = require("../middleware");
 router.get("/courses", middleware.isLoggedIn, (req, res)=>{
     Course.find({}, function(err, courses){
         res.render("courses.ejs", {courses, courses});
-    });
+    }).sort({"name": 1});
 });
 
 router.get("/courses/:name", middleware.isLoggedIn, (req, res)=>{
