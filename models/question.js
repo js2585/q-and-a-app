@@ -21,7 +21,7 @@ var questionSchema = new mongoose.Schema({
         },
         username: String
     },
-    date: {type: Date, default: Date.now}  
+    date: {type: Date, default: Date.now},
 });
 
 module.exports = mongoose.model("Question", questionSchema);

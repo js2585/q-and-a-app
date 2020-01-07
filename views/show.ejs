@@ -9,10 +9,11 @@
     </div>
     <div>
         <p class="whiteSpace"><%=question.body%></p>
-        <% var date = question.date; %>
-        <% var month = date.getUTCMonth() + 1; %>
-        <% var day = date.getUTCDate(); %>
-        <% var year = date.getUTCFullYear(); %>
+        <% var date = new Date(question.date.getTime() - question.date.getTimezoneOffset() * 60000); %>
+        <% var month = date.getMonth() + 1; %>
+        <% var day = date.getDate(); %>
+        <% var year = date.getFullYear(); %>
+        <% var newDate = month + "/" + day + "/" + year; %>
         <% var newDate = month + "/" + day + "/" + year; %>
         <div class="grid">
             <% var name = question.course.name.replace(/\s+/g, '-').toLowerCase() %>
@@ -35,10 +36,10 @@
     </div>
     
     <%question.answers.forEach(function(answer, index){%>
-        <% var date2 = answer.date; %>
-        <% var month = date2.getUTCMonth() + 1; %>
-        <% var day = date2.getUTCDate(); %>
-        <% var year = date2.getUTCFullYear(); %>
+        <% var date2 = new Date(answer.date.getTime() - answer.date.getTimezoneOffset() * 60000); %>
+        <% var month = date2.getMonth() + 1; %>
+        <% var day = date2.getDate(); %>
+        <% var year = date2.getFullYear(); %>
         <% var newDate2 = month + "/" + day + "/" + year; %>
         <p class="whiteSpace"><%=answer.text%></p>
         <p class="author">Answered By <em><%=answer.author.username%></em> on <%=newDate2%></p>

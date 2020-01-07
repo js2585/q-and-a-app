@@ -250,8 +250,24 @@ var data = [
     
 ]
 
+var newData = [
+    {
+        name: "ap csa",
+    },
+    {
+        name: "ap csp",
+    }  
+]
+
 function seedDB(){
-    
+    newData.forEach(function(course){
+        Course.create(course, function(err, result){
+            if (err){
+                console.log(err);
+            }
+        });
+    });
+
     // Course.deleteMany({}, function(err){
     //     if (err){
     //         console.log(err);
