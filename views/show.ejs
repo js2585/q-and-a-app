@@ -9,7 +9,7 @@
     </div>
     <div>
         <p class="whiteSpace"><%=question.body%></p>
-        <% var date = new Date(question.date.getTime() - question.date.getTimezoneOffset() * 60000); %>
+        <% var date = new Date(question.date.getTime() - 300 * 60000); %>
         <% var month = date.getMonth() + 1; %>
         <% var day = date.getDate(); %>
         <% var year = date.getFullYear(); %>
@@ -36,7 +36,7 @@
     </div>
     
     <%question.answers.forEach(function(answer, index){%>
-        <% var date2 = new Date(answer.date.getTime() - answer.date.getTimezoneOffset() * 60000); %>
+        <% var date2 = new Date(answer.date.getTime() - 300 * 60000); %>
         <% var month = date2.getMonth() + 1; %>
         <% var day = date2.getDate(); %>
         <% var year = date2.getFullYear(); %>

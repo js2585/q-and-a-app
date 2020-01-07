@@ -26,7 +26,7 @@
                 <div class="grid">
                     <% var name = question.course.name.replace(/\s+/g, '-').toLowerCase() %>
                     <a class="btn btn-primary btn-sm course" href="/courses/<%=name%>"><%=question.course.name%></a>
-                    <% var date = new Date(question.date.getTime() - question.date.getTimezoneOffset() * 60000); %>
+                    <% var date = new Date(question.date.getTime() - 300 * 60000); %>
                     <% var month = date.getMonth() + 1; %>
                     <% var day = date.getDate(); %>
                     <% var year = date.getFullYear(); %>

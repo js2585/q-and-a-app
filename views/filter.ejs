@@ -22,7 +22,7 @@
                         <%=question.body%>
                     <%}%>
                     <div class="grid">
-                        <% var date = new Date(question.date.getTime() - question.date.getTimezoneOffset() * 60000); %>
+                        <% var date = new Date(question.date.getTime() - 300 * 60000); %>
                         <% var month = date.getMonth() + 1; %>
                         <% var day = date.getDate(); %>
                         <% var year = date.getFullYear(); %>
