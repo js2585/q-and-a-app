@@ -33,7 +33,7 @@
                         <% var day = date.getDate(); %>
                         <% var year = date.getFullYear(); %>
                         <% var newDate = month + "/" + day + "/" + year; %>
-                        <p class="rightAlign">Asked on <%=newDate%></p>
+                        <p class="rightAlign">Asked by <em><%=question.author.username%></em> on <%=newDate%></p>
                     </div>
                 </div>
             </div>
